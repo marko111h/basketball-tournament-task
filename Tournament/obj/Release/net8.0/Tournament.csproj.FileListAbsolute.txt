@@ -1,0 +1,6 @@
+C:\Users\Marko\source\repos\BasketballTournament\Tournament\obj\Release\net8.0\Tournament.csproj.AssemblyReference.cache
+C:\Users\Marko\source\repos\BasketballTournament\Tournament\obj\Release\net8.0\Tournament.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marko\source\repos\BasketballTournament\Tournament\obj\Release\net8.0\Tournament.AssemblyInfoInputs.cache
+C:\Users\Marko\source\repos\BasketballTournament\Tournament\obj\Release\net8.0\Tournament.AssemblyInfo.cs
+C:\Users\Marko\source\repos\BasketballTournament\Tournament\obj\Release\net8.0\Tournament.csproj.CoreCompileInputs.cache
+C:\Users\Marko\source\repos\BasketballTournament\Tournament\obj\Release\net8.0\Tournament.sourcelink.json
