@@ -13,8 +13,8 @@ namespace Tournament
         static void Main(string[] args)
         {
             // Definišite putanje do fajlova
-            string groupsFilePath = @"C:\Users\Marko\source\repos\BasketballTournament\groups.json";
-            string exhibitionsFilePath = @"C:\Users\Marko\source\repos\BasketballTournament\exibitions.json";
+            string groupsFilePath = @"C:\Users\Marko\basketball-tournament-task\groups.json";
+            string exhibitionsFilePath = @"C:\Users\Marko\basketball-tournament-task\exibitions.json";
 
             try
             {
