@@ -33,3 +33,4 @@ C:\Users\Marko\basketball-tournament-task\Tournament\obj\Debug\net8.0\refint\Tou
 C:\Users\Marko\basketball-tournament-task\Tournament\obj\Debug\net8.0\Tournament.pdb
 C:\Users\Marko\basketball-tournament-task\Tournament\obj\Debug\net8.0\Tournament.genruntimeconfig.cache
 C:\Users\Marko\basketball-tournament-task\Tournament\obj\Debug\net8.0\ref\Tournament.dll
+C:\Users\Marko\basketball-tournament-task\Tournament\obj\Debug\net8.0\Tournament.sourcelink.json

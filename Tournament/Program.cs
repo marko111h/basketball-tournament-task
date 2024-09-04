@@ -20,6 +20,9 @@ namespace Tournament
             {
                 var groups = LoadTeamsFromJson(groupsFilePath);
 
+                // Učitaj rezultate prijateljskih utakmica i ažuriraj formu timova
+                LoadExhibitionResults(exhibitionsFilePath, groups);
+
                 //// following all match in group faze
                 ///
                 var groupMatches = new HashSet<(string, string)>();
@@ -103,7 +106,7 @@ namespace Tournament
             static (int, int) SimulateMatch(Team teamA, Team teamB)
             {
                 // Izračunavanje prednosti
-                double advantage = (teamB.FibaRank - teamA.FibaRank) * 2; // Faktor 2 za prilagođavanje
+                double advantage = (teamB.FibaRank - teamA.FibaRank) * 2 + (teamA.Form - teamB.Form) * 0.5; // Faktor 2 za prilagođavanje
 
                 // Generisanje poena
                 Random random = new Random();
@@ -115,6 +118,8 @@ namespace Tournament
                 scoreA = Math.Clamp(scoreA, 60, 120);
                 scoreB = Math.Clamp(scoreB, 60, 120);
 
+                // Ažuriraj formu nakon meča
+                UpdateForm(scoreA > scoreB ? teamA : teamB, scoreA > scoreB ? teamB : teamA, Math.Abs(scoreA - scoreB));
 
 
                 return (scoreA, scoreB);
@@ -356,11 +361,58 @@ namespace Tournament
                   
                     return matchups;
                 }
+             
 
 
 
 
             }
+            static void LoadExhibitionResults(string filePath, Dictionary<string, List<Team>> groups)
+            {
+                var json = File.ReadAllText(filePath);
+                var exhibitions = JsonConvert.DeserializeObject<Dictionary<string, List<Match>>>(json);
+
+                foreach (var exhibition in exhibitions)
+                {
+                    var group = groups.Values.SelectMany(g => g).ToList();
+                    var team = group.FirstOrDefault(t => t.Name == exhibition.Key);
+
+                    if (team != null)
+                    {
+                        foreach (var result in exhibition.Value)
+                        {
+                            // Parsiranje rezultata da se dobiju poeni
+                            var scores = result.Result.Split('-');
+                            if(scores.Length == 2)
+                            {
+                                int teamPoints = int.Parse(scores[0]);
+                                int opponentPoints = int.Parse(scores[1]);
+
+                                var opponent = group.FirstOrDefault(t => t.Name == result.Opponent);
+                                if (opponent != null)
+                                {
+                                    // Dodaj poene za formu na osnovu razlike u poenima i FIBA ranga protivnika
+                                    team.Form += (teamPoints - opponent.ForPoints) * (double)opponent.FibaRank / 100;
+
+                                }
+
+                            }
+                            
+                        }
+                    }
+                }
+            }
+
+            // Ažuriranje forme nakon svake utakmice
+            static void UpdateForm(Team winner, Team loser, int scoreDifference)
+            {
+                // Pobednik dobija poene za formu na osnovu razlike u poenima
+                winner.Form += scoreDifference;
+
+                // Gubitnik gubi poene za formu na osnovu razlike u poenima
+                loser.Form -= scoreDifference;
+            }
+
 
         }
     }

@@ -10,4 +10,5 @@ public class Team
     public int ForPoints { get; set; } = 0; // Points scored
     public int AgainstPoints { get; set; } = 0; // Points conceded
     public int PointDifference => ForPoints - AgainstPoints;
+    public double Form { get; set; } = 0; // Dodaj atribut za formu
 }
